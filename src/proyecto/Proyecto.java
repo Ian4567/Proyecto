@@ -5,7 +5,16 @@
  */
 package proyecto;
 
+
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.List;
+
 import java.util.Scanner;
+import objetos.Prendas;
 
 /**
  *
@@ -18,6 +27,7 @@ public class Proyecto {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 4) {
@@ -59,7 +69,87 @@ public class Proyecto {
     }
 
     private static void ejercicio1() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scanner sc = new Scanner(System.in);
+        List<Double> preciosFinales = new ArrayList<>();
+        boolean seguir = true;
+
+        try {
+            System.out.println("Ingrese el porcentaje de IVA a aplicar:");
+            double iva = sc.nextDouble();
+
+            while (seguir) {
+                System.out.println("Ingrese el número de paquetes:");
+                int nPaquetes = sc.nextInt();
+
+                System.out.println("Ingrese la tarifa básica para el envío:");
+                double tarifaBasica = sc.nextDouble();
+
+                System.out.println("Ingrese el tipo de envío (0, 1, 2, otros para 0€):");
+                int tipoEnvio = sc.nextInt();
+
+                System.out.println("Ingrese el día de la semana (lunes a domingo):");
+                String diaSemana = sc.next().toLowerCase();
+
+                double precioFinal = calcularPrecioFinal(tarifaBasica, tipoEnvio, diaSemana, iva) * nPaquetes;
+                preciosFinales.add(precioFinal);
+
+                System.out.println("Precio final para este envío: " + precioFinal + "€");
+                System.out.println("¿Desea agregar otro envío? (s/n)");
+                String respuesta = sc.next().toLowerCase();
+                if (!respuesta.equals("s")) {
+                    seguir = false;
+                }
+            }
+
+            Collections.sort(preciosFinales, Collections.reverseOrder());
+            System.out.println("Precios finales de los envíos (en orden descendente):");
+            for (double precio : preciosFinales) {
+                System.out.println(precio + "€");
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Ha introducido datos sin el formato adecuado o fuera de rango.");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error: " + e.getMessage());
+        }
     }
 
-}
+    private static double calcularPrecioFinal(double tarifaBasica, int tipoEnvio, String diaSemana, double iva) {
+        double recargoEnvio = 0;
+
+        switch (tipoEnvio) {
+            case 0:
+                recargoEnvio = 1.85;
+                break;
+            case 1:
+                recargoEnvio = 3.05;
+                break;
+            case 2:
+                recargoEnvio = 6.01;
+                break;
+            default:
+                recargoEnvio = 0;
+        }
+
+        double recargoDia = obtenerRecargoPorDia(diaSemana, tarifaBasica);
+        double precioSinIva = tarifaBasica + recargoEnvio + recargoDia;
+        double precioFinalConIva = precioSinIva + (precioSinIva * (iva / 100));
+
+        return Math.round(precioFinalConIva * 100.0) / 100.0;
+    }
+
+    private static double obtenerRecargoPorDia(String diaSemana, double tarifaBasica) {
+        switch (diaSemana) {
+            case "viernes":
+                return tarifaBasica * 0.10;
+            case "sabado":
+                return tarifaBasica * 0.15;
+            case "domingo":
+                return tarifaBasica * 0.20;
+            default:
+                return 0;
+        }
+    }
+
+    }
+

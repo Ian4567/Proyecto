@@ -19,12 +19,18 @@ public class Prendas {
 
     public Prendas(String tipoPrenda, String temporada, String referencia, String color, double pvp) {
         this.tipoPrenda = tipoPrenda;
+
         this.temporada = temporada;
         this.referencia = referencia;
         this.color = color;
         this.pvp = pvp;
     }
 
+    public Prendas() {
+    }
+
+    
+    
     public String getTipoPrenda() {
         return tipoPrenda;
     }
@@ -68,4 +74,14 @@ public class Prendas {
     public void modificarPvp() {
 
     }
+
+    
+
+    @Override
+    public String toString() {
+        return "Prendas{" + "tipoPrenda=" + tipoPrenda + ", temporada=" + temporada + ", referencia=" + referencia + ", color=" + color + ", pvp=" + pvp + '}';
+    }
+    
+    
+    
 }

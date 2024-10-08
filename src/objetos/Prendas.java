@@ -17,6 +17,14 @@ public class Prendas {
     private String color;
     private double pvp;
 
+    public Prendas() {
+        this.tipoPrenda = "";
+        this.temporada = "";
+        this.referencia = "";
+        this.color = "";
+        this.pvp = 0.0;
+    }
+
     public Prendas(String tipoPrenda, String temporada, String referencia, String color, double pvp) {
         this.tipoPrenda = tipoPrenda;
         this.temporada = temporada;
@@ -65,7 +73,22 @@ public class Prendas {
         this.pvp = pvp;
     }
 
-    public void modificarPvp() {
-
+    public void modificarPvp(double cantidad, String respuesta) {
+        if (respuesta.equalsIgnoreCase("incrementar")) {
+            this.pvp += cantidad;
+        } else if (respuesta.equalsIgnoreCase("decrementar")) {
+            this.pvp -= cantidad;
+        } else {
+            System.out.println("Respuesta no válida. Se espera 'incrementar' o 'decrementar'.");
+        }
     }
+
+    public void mostrarPrendas() {
+        System.out.println("Tipo de prenda: " + tipoPrenda);
+        System.out.println("Temporada: " + temporada);
+        System.out.println("Referencia: " + referencia);
+        System.out.println("Color: " + color);
+        System.out.println("PVP: " + pvp + " €");
+    }
+
 }

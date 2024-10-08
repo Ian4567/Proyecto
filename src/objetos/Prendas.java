@@ -27,6 +27,7 @@ public class Prendas {
 
     public Prendas(String tipoPrenda, String temporada, String referencia, String color, double pvp) {
         this.tipoPrenda = tipoPrenda;
+
         this.temporada = temporada;
         this.referencia = referencia;
         this.color = color;
@@ -89,6 +90,11 @@ public class Prendas {
         System.out.println("Referencia: " + referencia);
         System.out.println("Color: " + color);
         System.out.println("PVP: " + pvp + " €");
+    }
+
+    @Override
+    public String toString() {
+        return "Prendas{" + "tipoPrenda=" + tipoPrenda + ", temporada=" + temporada + ", referencia=" + referencia + ", color=" + color + ", pvp=" + pvp + '}';
     }
 
 }

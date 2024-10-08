@@ -5,8 +5,6 @@
  */
 package proyecto;
 
-
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +25,7 @@ public class Proyecto {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 4) {
@@ -65,7 +63,51 @@ public class Proyecto {
     }
 
     private static void ejercicio2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scanner sc = new Scanner(System.in);
+
+        
+        System.out.println("Dime una cadena de caracteres:");
+        String cadena1 = sc.next();
+
+        System.out.println("Dime otra cadena de caracteres:");
+        String cadena2 = sc.next();
+
+        
+        String concatenacion = cadena1 + ", " + cadena2 + ".";
+        System.out.println("Concatenación de las dos cadenas: " + concatenacion);
+
+        
+        if (cadena1.startsWith("L")) {
+            System.out.println("La cadena 1 empieza por L.");
+        } else {
+            System.out.println("La cadena 1 no empieza por L, sino por " + cadena1.charAt(0) + ".");
+        }
+
+        if (cadena2.startsWith("L")) {
+            System.out.println("La cadena 2 empieza por L.");
+        } else {
+            System.out.println("La cadena 2 no empieza por L, sino por " + cadena2.charAt(0) + ".");
+        }
+
+        if (cadena1.length() < cadena2.length()) {
+            System.out.println("La cadena 1 tiene menos caracteres que la cadena 2.");
+        } else if (cadena1.length() > cadena2.length()) {
+            System.out.println("La cadena 2 tiene menos caracteres que la cadena 1.");
+        } else {
+            System.out.println("Ambas cadenas tienen el mismo número de caracteres.");
+        }
+
+        
+        if (cadena2.contains("EL")) {
+            System.out.println("La cadena 2 contiene 'EL'.");
+        } else {
+            System.out.println("La cadena 2 no contiene 'EL'.");
+        }
+
+        
+        String cadenaModificada = cadena1 + "*";
+        System.out.println("La cadena 1 con un '*' al final es: " + cadenaModificada);
+
     }
 
     private static void ejercicio1() {
@@ -151,5 +193,4 @@ public class Proyecto {
         }
     }
 
-    }
-
+}
